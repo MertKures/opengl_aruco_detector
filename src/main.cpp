@@ -12,6 +12,10 @@
 #include "glad/gl.h"
 #include "GLFW/glfw3.h"
 
+#include <opencv2/core.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
+
 static void glfw_error_callback(int error, const char *description)
 {
     std::cout << "GLFW Error " << error << ": " << description << std::endl;
