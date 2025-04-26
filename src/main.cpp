@@ -1,5 +1,7 @@
 #include <iostream>
 #include <stdio.h>
+#include <thread>
+#include <chrono>
 
 #include "main.hpp"
 
@@ -65,7 +67,7 @@ int main(int, char **)
         glfwPollEvents();
         if (glfwGetWindowAttrib(window, GLFW_ICONIFIED) != 0)
         {
-            ImGui_ImplGlfw_Sleep(10);
+            std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
             continue;
         }
 
