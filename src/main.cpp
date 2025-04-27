@@ -3,8 +3,6 @@
 #include <thread>
 #include <chrono>
 
-#include "main.hpp"
-
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -15,6 +13,9 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
+
+#include "main.hpp"
+#include "ui/main_window.hpp"
 
 static void glfw_error_callback(int error, const char *description)
 {
@@ -65,6 +66,8 @@ int main(int, char **)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    
+    UI::MainWindow imgui_main_window;
 
     while (!glfwWindowShouldClose(window))
     {
@@ -79,26 +82,7 @@ int main(int, char **)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        {
-            static float f = 0.0f;
-            static int counter = 0;
-
-            ImGui::Begin("Hello, world!");
-
-            ImGui::Text("This is some useful text.");
-
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-            ImGui::ColorEdit3("clear color", (float *)&clear_color);
-
-            if (ImGui::Button("Button"))
-                counter++;
-
-            ImGui::SameLine();
-            ImGui::Text("counter = %d", counter);
-
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            ImGui::End();
-        }
+        imgui_main_window.render(io);
 
         ImGui::Render();
         int display_w, display_h;
