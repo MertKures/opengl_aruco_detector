@@ -6,4 +6,4 @@ find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL glfw glad imgui ${OpenCV_LIBS})
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL glfw glad imgui ${OpenCV_LIBS} glm)
