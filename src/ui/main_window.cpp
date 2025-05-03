@@ -1,27 +1,31 @@
 #include "ui/main_window.hpp"
+#include <iostream>
+#include <imgui_internal.h>
+#include "glad/gl.h"
+#include "GLFW/glfw3.h"
 
 UI::MainWindow::MainWindow()
 {
+    window_pos = {0, 0};
+    window_size = {0, 0};
 }
 
-void UI::MainWindow::render(ImGuiIO& io)
+void UI::MainWindow::render(ImGuiIO &io)
 {
-    static float f = 0.0f;
-    static int counter = 0;
+    window_size = io.DisplaySize;
+    ImGui::SetNextWindowSize(window_size);
+    ImGui::SetNextWindowPos(window_pos);
+    ImGui::Begin("Main window", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBringToFrontOnFocus);
 
-    ImGui::Begin("Hello, world!");
+    for (auto &window : child_windows)
+    {
+        window->render(io);
+    }
 
-    ImGui::Text("This is some useful text.");
-
-    ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-    ImGui::ColorEdit3("clear color", (float *)&clear_color);
-
-    if (ImGui::Button("Button"))
-        counter++;
-
-    ImGui::SameLine();
-    ImGui::Text("counter = %d", counter);
-
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
     ImGui::End();
+}
+
+void UI::MainWindow::add_child_window(std::shared_ptr<IWindow> window)
+{
+    child_windows.push_back(window);
 }

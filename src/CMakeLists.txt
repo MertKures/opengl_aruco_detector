@@ -1,6 +1,9 @@
 add_executable(${PROJECT_NAME}
     main.cpp
     ui/main_window.cpp
+    ui/scene_window.cpp
+    ui/camera_window.cpp
+    ui/aruco_window.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)
 

@@ -16,6 +16,9 @@
 
 #include "main.hpp"
 #include "ui/main_window.hpp"
+#include "ui/scene_window.hpp"
+#include "ui/camera_window.hpp"
+#include "ui/aruco_window.hpp"
 
 static void glfw_error_callback(int error, const char *description)
 {
@@ -88,6 +91,13 @@ int main(int argc, char **argv)
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     UI::MainWindow imgui_main_window;
+    std::shared_ptr<UI::SceneWindow> scene_window = std::make_shared<UI::SceneWindow>();
+    std::shared_ptr<UI::CameraWindow> camera_window = std::make_shared<UI::CameraWindow>();
+    std::shared_ptr<UI::ArucoWindow> aruco_window = std::make_shared<UI::ArucoWindow>();
+
+    imgui_main_window.add_child_window(scene_window);
+    imgui_main_window.add_child_window(camera_window);
+    imgui_main_window.add_child_window(aruco_window);
 
     while (!glfwWindowShouldClose(window))
     {
