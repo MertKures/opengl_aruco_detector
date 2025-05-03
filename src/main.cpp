@@ -22,8 +22,28 @@ static void glfw_error_callback(int error, const char *description)
     std::cout << "GLFW Error " << error << ": " << description << std::endl;
 }
 
-int main(int, char **)
+int main(int argc, char **argv)
 {
+    const std::string keys =
+        "{help h |      | Print a text for help.}"
+        "{fps    | 30.0 | Frames per second.    }";
+
+    cv::CommandLineParser parser = cv::CommandLineParser(argc, argv, keys);
+
+    if (!parser.check())
+    {
+        parser.printErrors();
+        return 0;
+    }
+    else if (parser.has("help") || parser.has("h"))
+    {
+        parser.printMessage();
+        return 0;
+    }
+
+    assert(parser.get<float>("fps") > 0.0);
+    const unsigned short LOOP_DELAY = static_cast<unsigned short>(1.0 / parser.get<float>("fps") * 1000);
+
     glfwSetErrorCallback(glfw_error_callback);
 
     if (!glfwInit())
@@ -66,7 +86,7 @@ int main(int, char **)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-    
+
     UI::MainWindow imgui_main_window;
 
     while (!glfwWindowShouldClose(window))
@@ -74,7 +94,7 @@ int main(int, char **)
         glfwPollEvents();
         if (glfwGetWindowAttrib(window, GLFW_ICONIFIED) != 0)
         {
-            std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
+            std::this_thread::sleep_for(std::chrono::nanoseconds(LOOP_DELAY));
             continue;
         }
 
@@ -93,6 +113,8 @@ int main(int, char **)
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(window);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(LOOP_DELAY));
     }
 
     ImGui_ImplOpenGL3_Shutdown();
