@@ -21,6 +21,7 @@ namespace UI
         void generate_and_upload_marker(cv::aruco::PredefinedDictionaryType dict_type, int marker_id, int max_id);
 
         int current_item = 0, previous_item = -1, selected_marker_id = 0;
+        cv::aruco::Dictionary dictionary;
 
     private:
         DictionaryEntry aruco_dicts[21] = {
@@ -48,7 +49,6 @@ namespace UI
         cv::Mat marker_image;
         unsigned int marker_texture = 0;
         bool texture_uploaded = false;
-        cv::aruco::ArucoDetector detector;
     };
 }; // namespace UI
 

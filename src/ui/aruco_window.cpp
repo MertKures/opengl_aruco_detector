@@ -80,9 +80,8 @@ void UI::ArucoWindow::generate_and_upload_marker(cv::aruco::PredefinedDictionary
     const int markerSize = 200;
     const int borderBits = 1;
 
-    auto dictionary = cv::aruco::getPredefinedDictionary(dict_type);
+    dictionary = cv::aruco::getPredefinedDictionary(dict_type);
     cv::aruco::generateImageMarker(dictionary, markerId, markerSize, marker_image, borderBits);
-    detector = cv::aruco::ArucoDetector(dictionary);
 
     cv::Mat rgba_image;
     cv::cvtColor(marker_image, rgba_image, cv::COLOR_GRAY2RGBA);
