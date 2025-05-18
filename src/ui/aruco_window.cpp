@@ -77,6 +77,7 @@ void UI::ArucoWindow::generate_and_upload_marker(cv::aruco::PredefinedDictionary
     if (markerId >= max_id)
         markerId = max_id - 1;
 
+    // TODO: Make it customizable.
     const int markerSize = 200;
     const int borderBits = 1;
 
