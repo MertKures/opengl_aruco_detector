@@ -3,11 +3,6 @@
 #include "glad/gl.h"
 #include <iostream>
 
-cv::Mat marker_image;
-unsigned int marker_texture = 0;
-bool texture_uploaded = false;
-cv::aruco::ArucoDetector detector;
-
 UI::ArucoWindow::ArucoWindow()
 {
     int markerId = 0;

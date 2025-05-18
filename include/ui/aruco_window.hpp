@@ -45,6 +45,10 @@ namespace UI
             {"AprilTag 25h9", cv::aruco::DICT_APRILTAG_25h9, 35},
             {"AprilTag 36h10", cv::aruco::DICT_APRILTAG_36h10, 2320},
             {"AprilTag 36h11", cv::aruco::DICT_APRILTAG_36h11, 587}};
+        cv::Mat marker_image;
+        unsigned int marker_texture = 0;
+        bool texture_uploaded = false;
+        cv::aruco::ArucoDetector detector;
     };
 }; // namespace UI
 
