@@ -20,6 +20,11 @@ namespace UI
         void render(ImGuiIO &io) override;
         void generate_and_upload_marker(cv::aruco::PredefinedDictionaryType dict_type, int marker_id, int max_id);
 
+        // Getter methods for SceneWindow
+        cv::aruco::PredefinedDictionaryType get_current_dictionary_type() const;
+        int get_selected_marker_id() const;
+        int get_current_item() const;
+
         cv::aruco::Dictionary dictionary;
 
     private:

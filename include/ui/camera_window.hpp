@@ -14,7 +14,7 @@ namespace UI
     class CameraWindow : public IWindow
     {
     public:
-        CameraWindow();
+        CameraWindow(std::shared_ptr<Utils::CameraManager> camera_manager);
         ~CameraWindow();
         void render(ImGuiIO &io) override;
 
@@ -33,7 +33,7 @@ namespace UI
         ImVec2 window_pos, window_size;
 
     private:
-        std::unique_ptr<Utils::CameraManager> camera_manager_;
+        std::shared_ptr<Utils::CameraManager> camera_manager_;
     };
 
 } // namespace UI

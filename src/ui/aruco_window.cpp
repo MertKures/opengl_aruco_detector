@@ -70,6 +70,21 @@ void UI::ArucoWindow::render(ImGuiIO &io)
     ImGui::End();
 }
 
+cv::aruco::PredefinedDictionaryType UI::ArucoWindow::get_current_dictionary_type() const
+{
+    return aruco_dicts[current_item].type;
+}
+
+int UI::ArucoWindow::get_selected_marker_id() const
+{
+    return selected_marker_id;
+}
+
+int UI::ArucoWindow::get_current_item() const
+{
+    return current_item;
+}
+
 void UI::ArucoWindow::generate_and_upload_marker(cv::aruco::PredefinedDictionaryType dict_type, int marker_id, int max_id)
 {
     int markerId = marker_id;

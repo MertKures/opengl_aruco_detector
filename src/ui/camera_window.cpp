@@ -2,8 +2,8 @@
 #include "ui/camera_window.hpp"
 #include <opencv2/opencv.hpp>
 
-UI::CameraWindow::CameraWindow()
-    : camera_manager_(std::make_unique<Utils::CameraManager>())
+UI::CameraWindow::CameraWindow(std::shared_ptr<Utils::CameraManager> camera_manager)
+    : camera_manager_(camera_manager)
 {
     camera_manager_->start();
 }
