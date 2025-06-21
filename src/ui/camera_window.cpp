@@ -55,18 +55,28 @@ void UI::CameraWindow::render(ImGuiIO &io)
     if (camera_manager_->is_camera_opened())
     {
         cv::Mat frame = camera_manager_->get_latest_frame();
-        
+
         if (!frame.empty())
         {
             // Update the image data
             image_rgba = frame;
             generate_and_upload_image();
 
-            ImVec2 image_size(window_size.x / 1.5, window_size.y / 1.5);
+            float original_aspect_ratio = static_cast<float>(image_rgba.cols) / image_rgba.rows;
+            float max_width = window_size.x * 0.8f;
+            float max_height = window_size.y * 0.6f;
+
+            ImVec2 image_size;
+            if (max_width / original_aspect_ratio <= max_height)
+                image_size = ImVec2(max_width, max_width / original_aspect_ratio);
+            else
+                image_size = ImVec2(max_height * original_aspect_ratio, max_height);
+
             ImGui::SetCursorScreenPos(
                 ImVec2(
                     window_pos.x + window_size.x / 2 - image_size.x / 2,
                     window_pos.y + window_size.y / 2 - image_size.y / 2 + 10));
+
             ImGui::Image(image_texture, image_size);
         }
     }

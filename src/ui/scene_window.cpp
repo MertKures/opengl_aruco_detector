@@ -188,8 +188,17 @@ void UI::SceneWindow::render_detected_arucos()
     glBindTexture(GL_TEXTURE_2D, frame_texture_);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, display_frame_rgba.cols, display_frame_rgba.rows, GL_RGBA, GL_UNSIGNED_BYTE, display_frame_rgba.data);
 
-    // Display the image
-    ImVec2 image_size(window_size.x / 1.5, window_size.y / 1.5);
+    float original_aspect_ratio = static_cast<float>(display_frame_rgba.cols) / display_frame_rgba.rows;
+
+    float max_width = window_size.x * 0.8f;
+    float max_height = window_size.y * 0.6f;
+
+    ImVec2 image_size;
+    if (max_width / original_aspect_ratio <= max_height)
+        image_size = ImVec2(max_width, max_width / original_aspect_ratio);
+    else
+        image_size = ImVec2(max_height * original_aspect_ratio, max_height);
+
     ImGui::SetCursorScreenPos(
         ImVec2(
             window_pos.x + window_size.x / 2 - image_size.x / 2,
