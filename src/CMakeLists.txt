@@ -4,6 +4,8 @@ add_executable(${PROJECT_NAME}
     ui/scene_window.cpp
     ui/camera_window.cpp
     ui/aruco_window.cpp
+    utils/camera_manager.cpp
+    utils/camera_utils.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)
 
