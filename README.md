@@ -57,7 +57,7 @@ The system uses OpenCV's ArUco detector to identify markers in each camera frame
 2. **Clone and Build**:
 
    ```bash
-   git clone https://github.com/MertKures/opengl_aruco_detector.git
+   git clone --recursive https://github.com/MertKures/opengl_aruco_detector.git
    cd opengl_aruco_detector
    mkdir build && cd build
    cmake ..
