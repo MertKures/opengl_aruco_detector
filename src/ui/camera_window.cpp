@@ -62,7 +62,7 @@ void UI::CameraWindow::render(ImGuiIO &io)
             image_rgba = frame;
             generate_and_upload_image();
 
-            ImVec2 image_size(200, 200);
+            ImVec2 image_size(window_size.x / 1.5, window_size.y / 1.5);
             ImGui::SetCursorScreenPos(
                 ImVec2(
                     window_pos.x + window_size.x / 2 - image_size.x / 2,
